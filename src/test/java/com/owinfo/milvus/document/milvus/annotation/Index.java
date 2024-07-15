@@ -1,4 +1,4 @@
-package com.owinfo.milvus.document.annotation;
+package com.owinfo.milvus.document.milvus.annotation;
 
 import io.milvus.v2.common.IndexParam;
 

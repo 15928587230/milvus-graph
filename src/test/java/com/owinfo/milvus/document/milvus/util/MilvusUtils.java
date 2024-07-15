@@ -1,8 +1,8 @@
-package com.owinfo.milvus.document.util;
+package com.owinfo.milvus.document.milvus.util;
 
-import com.owinfo.milvus.document.annotation.Collection;
-import com.owinfo.milvus.document.annotation.Field;
-import com.owinfo.milvus.document.annotation.Index;
+import com.owinfo.milvus.document.milvus.annotation.Collection;
+import com.owinfo.milvus.document.milvus.annotation.Field;
+import com.owinfo.milvus.document.milvus.annotation.Index;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.IndexParam;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;

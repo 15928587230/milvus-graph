@@ -1,8 +1,8 @@
-package com.owinfo.milvus.document.domain;
+package com.owinfo.milvus.document.milvus.domain;
 
-import com.owinfo.milvus.document.annotation.Collection;
-import com.owinfo.milvus.document.annotation.Field;
-import com.owinfo.milvus.document.annotation.Index;
+import com.owinfo.milvus.document.milvus.annotation.Collection;
+import com.owinfo.milvus.document.milvus.annotation.Field;
+import com.owinfo.milvus.document.milvus.annotation.Index;
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.common.IndexParam;
 import lombok.Getter;

@@ -1,8 +1,8 @@
-package com.owinfo.milvus.document;
+package com.owinfo.milvus.document.milvus;
 
 import com.owinfo.milvus.MilvusGraphApplicationTests;
-import com.owinfo.milvus.document.domain.DocxDocument;
-import com.owinfo.milvus.document.util.MilvusUtils;
+import com.owinfo.milvus.document.milvus.domain.DocxDocument;
+import com.owinfo.milvus.document.milvus.util.MilvusUtils;
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import lombok.extern.slf4j.Slf4j;
