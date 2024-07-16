@@ -46,6 +46,13 @@
             <version>0.32.0</version>
         </dependency>
 
+        <!--   试下embedding和reranking模型     -->
+        <dependency>
+            <groupId>dev.langchain4j</groupId>
+            <artifactId>langchain4j-jina</artifactId>
+            <version>0.32.0</version>
+        </dependency>
+
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-milvus</artifactId>
