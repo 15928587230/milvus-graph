@@ -12,6 +12,8 @@ import dev.langchain4j.data.document.parser.apache.tika.ApacheTikaDocumentParser
 import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
+import dev.langchain4j.model.jina.JinaEmbeddingModel;
+import dev.langchain4j.model.jina.JinaScoringModel;
 import dev.langchain4j.model.output.Response;
 import dev.langchain4j.model.qianfan.QianfanChatModel;
 import dev.langchain4j.model.qianfan.QianfanEmbeddingModel;
@@ -24,6 +26,7 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
@@ -31,18 +34,37 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
 
     private boolean notInit = true;
     private MilvusClientV2 clientV2;
-    QianfanChatModel chatModel = QianfanChatModel.builder()
-            .apiKey("xxx")
-            .secretKey("xxx")
-            .modelName("Yi-34B-Chat")
-            .build();
 
-    QianfanEmbeddingModel embeddingModel = QianfanEmbeddingModel.builder()
-            .apiKey("xxx")
-            .secretKey("xxx")
-            // 可以用要收费
-            .modelName("Embedding-V1")
-            .build();
+    protected QianfanChatModel getQianfanChatModel() {
+        QianfanChatModel chatModel = QianfanChatModel.builder()
+                .apiKey("xxx")
+                .secretKey("17o1cZgs1oByri496ZpJoUjt1naSgJPH")
+                .modelName("Yi-34B-Chat")
+                .build();
+        return chatModel;
+    }
+
+    protected QianfanEmbeddingModel getQianfanEmbeddingModel() {
+        QianfanEmbeddingModel embeddingModel = QianfanEmbeddingModel.builder()
+                .apiKey("xxx")
+                .secretKey("gMZhB7NlJInG6eluhG3dy9SOqWY7VEYf")
+                // 可以用要收费
+                .modelName("Embedding-V1")
+                .build();
+        return embeddingModel;
+    }
+
+    protected JinaEmbeddingModel getJinaEmbeddingModel() {
+        JinaEmbeddingModel jinaEmbeddingModel = JinaEmbeddingModel
+                .withApiKey("jina_e467a53ef0d44efc983388adb25671aeop4xLrutrhmD2hRGHDj-xEV_oNV6");
+        return jinaEmbeddingModel;
+    }
+
+    protected JinaScoringModel getJinaScoringModel() {
+        JinaScoringModel jinaScoringModel = JinaScoringModel
+                .builder().apiKey("jina_e467a53ef0d44efc983388adb25671aeop4xLrutrhmD2hRGHDj-xEV_oNV6").build();
+        return jinaScoringModel;
+    }
 
     @Before
     public void initClient() {
@@ -68,13 +90,13 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
 
     @Test
     public void testQianfanChat() {
-        String generate = chatModel.generate("对文章段落进行总结，" + text);
+        String generate = getQianfanChatModel().generate("对文章段落进行总结，" + text);
         System.out.println(generate);
     }
 
     @Test
     public void testOutputObj() {
-        ExtractDocument extractDocument = AiServices.create(ExtractDocument.class, chatModel);
+        ExtractDocument extractDocument = AiServices.create(ExtractDocument.class, getQianfanChatModel());
         DocumentKeyword documentKeyword = extractDocument.extractFrom(text);
         System.out.println(documentKeyword);
     }
@@ -88,7 +110,7 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
 
     @Test
     public void testQianfanEmbedding() {
-        Response<Embedding> embed = embeddingModel
+        Response<Embedding> embed = getQianfanEmbeddingModel()
                 .embed("测试LangChain4J文档处理、关键词摘要提取、模型向量化使用");
         float[] vector = embed.content().vector();
         System.out.println(vector.length);
@@ -97,11 +119,31 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
         }
     }
 
+    @Test
+    public void testJinaEmbedding() {
+        Response<Embedding> embed = getJinaEmbeddingModel().embed("测试LangChain4J文档处理、关键词摘要提取、模型向量化使用");
+        float[] vector = embed.content().vector();
+        System.out.println(vector.length);
+        for (int i = 0; i < vector.length; i++) {
+            System.out.print(vector[i] + " ");
+        }
+    }
+
+    @Test
+    public void testJinaReranking() throws IOException {
+        JinaScoringModel jinaScoringModel = getJinaScoringModel();
+        List<TextSegment> segment = createSegment("中华人民共和国体育法.docx");
+        Response<List<Double>> response = jinaScoringModel.scoreAll(segment, "解释一下体育法是什么");
+        List<Double> content = response.content();
+        content.sort(Comparator.reverseOrder());
+        content.forEach(System.out::println);
+    }
+
     // 测试LangCain4J自带的文档解析功能
     @Test
     public void testTikaSplitterDocument() throws Exception {
         List<TextSegment> textSegments = createSegment("中华人民共和国体育法.docx");
-        for (TextSegment textSegment: textSegments) {
+        for (TextSegment textSegment : textSegments) {
             System.out.println(textSegment + "\n\n");
         }
     }
