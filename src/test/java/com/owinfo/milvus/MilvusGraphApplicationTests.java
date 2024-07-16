@@ -11,4 +11,8 @@ class MilvusGraphApplicationTests {
     void contextLoads() {
     }
 
+    @org.junit.Test
+    public void testLangChain() {
+
+    }
 }
