@@ -54,6 +54,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.neo4j.driver</groupId>
+            <artifactId>neo4j-java-driver</artifactId>
+            <version>5.21.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-milvus</artifactId>
             <version>0.32.0</version>
