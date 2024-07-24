@@ -1,6 +1,7 @@
 package com.owinfo.milvus.document.milvus;
 
 import com.owinfo.milvus.MilvusGraphApplicationTests;
+import com.owinfo.milvus.document.LLMUtils;
 import com.owinfo.milvus.document.milvus.domain.DocumentKeyword;
 import com.owinfo.milvus.document.milvus.domain.DocxDocument;
 import com.owinfo.milvus.document.milvus.domain.ExtractDocument;
@@ -132,7 +133,7 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
     @Test
     public void testJinaReranking() throws IOException {
         JinaScoringModel jinaScoringModel = getJinaScoringModel();
-        List<TextSegment> segment = createSegment("中华人民共和国体育法.docx");
+        List<TextSegment> segment = LLMUtils.createSegment("中华人民共和国体育法.docx");
         Response<List<Double>> response = jinaScoringModel.scoreAll(segment, "解释一下体育法是什么");
         List<Double> content = response.content();
         content.sort(Comparator.reverseOrder());
@@ -142,7 +143,7 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
     // 测试LangCain4J自带的文档解析功能
     @Test
     public void testTikaSplitterDocument() throws Exception {
-        List<TextSegment> textSegments = createSegment("中华人民共和国体育法.docx");
+        List<TextSegment> textSegments = LLMUtils.createSegment("中华人民共和国体育法.docx");
         for (TextSegment textSegment : textSegments) {
             System.out.println(textSegment + "\n\n");
         }
@@ -150,17 +151,6 @@ public class DocumentMilvusTests extends MilvusGraphApplicationTests {
 
     protected DocumentKeyword extractDocumentKeyword() {
         return new DocumentKeyword();
-    }
-
-    protected List<TextSegment> createSegment(String filePath) throws IOException {
-        ApacheTikaDocumentParserFactory parserFactory = new ApacheTikaDocumentParserFactory();
-        DocumentParser documentParser = parserFactory.create();
-        ClassPathResource resource = new ClassPathResource(filePath);
-        Document document = documentParser.parse(resource.getInputStream());
-        DocumentSplitter splitter = DocumentSplitters.recursive(500, 50);
-        List<TextSegment> textSegments = splitter.split(document);
-        // 少于80的分段文本没有参考意义
-        return textSegments.stream().filter(textSegment -> textSegment.text().length() > 80).toList();
     }
 
     String text = "鼓励学校组建运动队、俱乐部等体育训练组织，开展多种形式的课余体育训练，有条件的可组建高水平运动队，培养竞技体育后备人才。\n" +
