@@ -81,6 +81,7 @@ public class DocumentNeo4jTests extends MilvusGraphApplicationTests {
     /**
      * GraphRAG知识抽取内容质量低，耗时长，需要的资源高，且耗时耗人力。
      * 因此可以采用折中方式，传统RAG + LLM文本处理，提高内容质量
+     *
      * @throws IOException
      */
     @Test
@@ -179,5 +180,11 @@ public class DocumentNeo4jTests extends MilvusGraphApplicationTests {
             "体育行政部门应当在传授体育知识技能、组织体育训练、举办体育赛事活动、管理体育场地设施等方面为学校提供指导和帮助，并配合教育行政部门推进学校运动队和高水平运动队建设。\n" +
             "第二十六条　学校必须按照国家有关规定开齐开足体育课，确保体育课时不被占用。\n" +
             "学校应当在体育课教学时，组织病残等特殊体质学生参加适合其特点的体育活动。";
+
+    @Test
+    public void getLength() {
+        // 长度234能生成这么多实体关系，上面限制300长度，估计返回内容又要限制token数量，导致格式错误
+        System.out.println(doc.length());
+    }
 
 }
