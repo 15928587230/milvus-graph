@@ -960,3 +960,136 @@
   ]
 }
 ```
+> medicine
+
+```
+{
+  "spo": [
+    {
+      "subject": "甲状腺结节",
+      "predicate": "并发症",
+      "object": "甲状腺癌"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "常见症状",
+      "object": "颈部疼痛"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "常见症状",
+      "object": "咽喉部异物感"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "常见症状",
+      "object": "压迫感"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "适用药品",
+      "object": "放射性碘治疗"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "适用药品",
+      "object": "复方碘口服液(Lugol液)"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "适用药品",
+      "object": "抗甲状腺药物"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "就诊科室",
+      "object": "普外科"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "就诊科室",
+      "object": "甲状腺外科"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "就诊科室",
+      "object": "内分泌科"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "就诊科室",
+      "object": "头颈外科"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "发病部位",
+      "object": "甲状腺内"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "异常指征",
+      "object": "颈部前方的结节"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "异常指征",
+      "object": "甲状腺功能异常"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "异常指征",
+      "object": "压迫感"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "异常指征",
+      "object": "颈部疼痛"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "异常指征",
+      "object": "咽喉部异物感"
+    },
+    {
+      "subject": "甲状腺结节",
+      "predicate": "异常指征",
+      "object": "囊内自发性出血"
+    }
+  ]
+}
+
+{
+  "spo": [
+    {
+      "subject": "糖尿病",
+      "predicate": "并发症",
+      "object": "眼、肾、神经、心脏、血管等组织器官的慢性进行性病变、功能减退甚至衰竭"
+    },
+    {
+      "subject": "糖尿病",
+      "predicate": "常见症状",
+      "object": "多饮、多尿、多食和体重下降"
+    },
+    {
+      "subject": "糖尿病",
+      "predicate": "适用药品",
+      "object": "胰岛素"
+    },
+    {
+      "subject": "糖尿病",
+      "predicate": "就诊科室",
+      "object": "内分泌科"
+    },
+    {
+      "subject": "糖尿病",
+      "predicate": "发病部位",
+      "object": "胰腺"
+    },
+    {
+      "subject": "糖尿病",
+      "predicate": "异常指征",
+      "object": "高血糖"
+    }
+  ]
+}
+```

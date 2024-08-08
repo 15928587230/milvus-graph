@@ -115,6 +115,39 @@ public class DocumentNeo4jTests extends MilvusGraphApplicationTests {
         System.out.println(res);
     }
 
+    // openSPG提示词
+    @Test
+    public void testMedicine() {
+        QianfanChatModel qianfan = LLMUtils.qianfan();
+        String generate = qianfan.generate(medicinePrompt.replace("${input}", medicineText));
+        System.out.println(generate);
+    }
+
+    // openSPG提示词
+    @Test
+    public void testMedicine1() {
+        QianfanChatModel qianfan = LLMUtils.qianfan();
+        String generate = qianfan.generate(medicinePrompt.replace("${input}", medicineText1));
+        System.out.println(generate);
+    }
+
+
+
+    String medicineText = "甲状腺结节是指在甲状腺内的肿块，可随吞咽动作随甲状腺而上下移动，是临床常见的病症，可由多种病因引起。临床上有多种甲状腺疾病，如甲状腺退行性变、炎症、自身免疫以及新生物等都可以表现为结节。甲状腺结节可以单发，也可以多发，多发结节比单发结节的发病率高，但单发结节甲状腺癌的发生率较高。患者通常可以选择在普外科，甲状腺外科，内分泌科，头颈外科挂号就诊。有些患者可以触摸到自己颈部前方的结节。在大多情况下，甲状腺结节没有任何症状，甲状腺功能也是正常的。甲状腺结节进展为其它甲状腺疾病的概率只有1%。有些人会感觉到颈部疼痛、咽喉部异物感，或者存在压迫感。当甲状腺结节发生囊内自发性出血时，疼痛感会更加强烈。治疗方面，一般情况下可以用放射性碘治疗，复方碘口服液(Lugol液)等，或者服用抗甲状腺药物来抑制甲状腺激素的分泌。目前常用的抗甲状腺药物是硫脲类化合物，包括硫氧嘧啶类的丙基硫氧嘧啶(PTU)和甲基硫氧嘧啶(MTU)及咪唑类的甲硫咪唑和卡比马唑。";
+    String medicineText1 = "糖尿病是一种由胰岛素绝对或相对分泌不足以及利用障碍引发的，以高血糖为标志的慢性疾病。该疾病主要分为1型、2型和妊娠糖尿病三种类型。病因主要归结为遗传因素和环境因素的共同作用，包括胰岛细胞功能障碍导致的胰岛素分泌下降，或者机体对胰岛素作用不敏感或两者兼备，使得血液中的葡萄糖不能有效被利用和储存。一部分糖尿病患者和家族有疾病聚集现象。此外，糖尿病在全球范围内的发病率和患病率均呈上升趋势。\n" +
+            "糖尿病的症状主要表现为“三多一少”，即多饮、多尿、多食和体重下降。此外，病程久的患者可能会引发眼、肾、神经、心脏、血管等组织器官的慢性进行性病变、功能减退甚至衰竭，并有可能引发急性严重代谢紊乱。\n" +
+            "糖尿病的主要治疗手段为通过科学合理的治疗方法，使血糖水平维持在正常范围内，防止急性代谢紊乱的发生，防止或延缓并发症的发生和发展，改善生活质量。预后情况取决于病情控制及并发症的存在与否。糖尿病的预防主要依赖于健康的生活方式，包括均衡饮食、适量运动、保持正常体重、定期体检等。";
+    String medicinePrompt = "[疾病-并发症-疾病,\n" +
+            "疾病-常见症状-症状,\n" +
+            "疾病-适用药品-药品,\n" +
+            "疾病-就诊科室-医院科室,\n" +
+            "疾病-发病部位-人体部位,\n" +
+            "疾病-异常指征-医学指征]\n" +
+            "从下列句子中提取定义的这些关系。最终抽取结果以json格式输出，且predicate必须在[并发症,常见症状,适用药品,就诊科室,发病部位,异常指征]内。\n" +
+            "input:${input}\n" +
+            "输出格式为:{\"spo\":[{\"subject\":,\"predicate\":,\"object\":},]}\n" +
+            "\"output\":\n" +
+            "    '";
     String entityRelationShips = "{\n" +
             "  \"entities\": [\n" +
             "    (\"entity\", \"教育行政部门\", \"教育行政部门\", \"负责教育政策的制定和执行\"),\n" +
